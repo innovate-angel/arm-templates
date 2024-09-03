@@ -1,0 +1,67 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "vnetName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the virtual network"
+            },
+            "defaultValue": "vnet"
+        },
+        "location": {
+            "type": "string",
+            "metadata": {
+                "description": "Location for all resources."
+            },
+            "defaultValue": "eastus"
+        },
+        "subnetname": {
+            "type": "string",
+            "metadata": {
+                "description": "description"
+            },
+            "defaultValue": "subnet1"
+        },
+        "addressPrefixes": {
+            "type": "string",
+            "metadata": {
+                "description": "Address prefix for the virtual network"
+            },
+            "defaultValue": "10.0.0.0/16"
+    },
+    "subnetAddressPrefixes": {
+        "type": "string",
+        "metadata": {
+            "description": "address prefix for the subnet"
+        },
+        "defaultValue": "10.0.1.0/24"
+    }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/virtualnetworks",
+            "apiVersion": "2019-11-01",
+            "name": "[parameters('vnetName')]",
+            "location": "[parameters('location')]",
+            "properties": {
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "[parameters('addressPrefixes')]"
+                    ]
+                },
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetname')]",
+                        "properties": {
+                            "addressPrefix": "[parameters('subnetAddressPrefixes')]"
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "outputs": {}
+}

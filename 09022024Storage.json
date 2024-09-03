@@ -1,0 +1,83 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageAccountName": {
+            "type": "string",
+            "metadata": {
+                "description": "Name of the storage account"
+            },
+            "defaultValue": "papistorageaccount999",
+            "minLength": 3,
+            "maxLength": 24
+        },
+        "storageLocation": {
+            "type": "string",
+            "metadata": {
+                "description": "Location for all resources."
+            },
+            "defaultValue": "eastus"      
+        },
+        "storageSku": {
+            "type": "string",
+            "metadata": {
+                "description": "Storage account SKU"
+            },
+            "defaultValue": "Premium_LRS",
+            "allowedValues": [
+                "Standard_LRS",
+                "Standard_GRS",
+                "Standard_RAGRS",
+                "Standard_ZRS",
+                "Premium_LRS",
+                "Premium_ZRS",
+                "Premium_GRS",
+                "Premium_RAGRS"
+            ]
+        },
+        "storageKind": {
+            "type": "string",
+            "metadata": {
+                "description": "Storage account kind"
+            },
+            "defaultValue": "StorageV2",
+            "allowedValues": [
+                "Storage",
+                "StorageV2",
+                "BlobStorage"
+            ]
+        },
+        "storageskutier": {
+            "type": "string",
+            "metadata": {
+                "description": "Storage account SKU tier"
+            },
+            "defaultValue": "Premium",
+            "allowedValues": [
+                "Standard",
+                "Premium"
+            ]
+        }
+    },
+    "functions": [],
+    "variables": {
+        "apiversion": "2023-04-01"
+    },
+    "resources": [
+        {
+            "name": "[parameters('storageAccountName')]",
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "[variables('apiversion')]",
+            "tags": {
+                "displayName": "{parameters('storageAccountName')}"
+            },
+            "location": "[parameters('storageLocation')]",
+            "kind": "[parameters('storageKind')]",
+            "sku": {
+                "name": "[parameters('storageSku')]",
+                "tier": "[parameters('storageskutier')]"
+            }
+        }
+    ],
+    "outputs": {}
+}

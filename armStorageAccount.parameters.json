@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "storageaccountname": {
+            "value": "storageaccount08272024"
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "storageSKU": {
+            "value": "Premium_LRS" 
+        },
+        "storageTier": {
+            "value": "Premium" 
+        }
+    }
+}
